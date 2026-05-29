@@ -1,4 +1,4 @@
-# Collections for Edge — Edge Add-ons Store Description
+# Collections — Edge Add-ons Store Description
 
 ---
 
@@ -10,7 +10,7 @@ Collect and organize web content — links, quotes, images, and notes — in nam
 
 ## Full Description
 
-**Collections for Edge** brings back the beloved Microsoft Edge Collections feature that was deprecated — and improves on it.
+**Collections** brings back the beloved Microsoft Edge Collections feature that was deprecated — and improves on it.
 
 Save anything from the web into named, colour-coded collections without ever leaving your current tab. The extension lives entirely in your browser's sidebar.
 

@@ -1,4 +1,4 @@
-# Collections for Edge
+# Collections
 
 A browser extension that recreates the deprecated Microsoft Edge Collections feature — collect and organize links, quotes, images, and notes from anywhere on the web.
 
