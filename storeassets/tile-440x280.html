@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 440px; height: 280px; overflow: hidden; }
+  body {
+    background: linear-gradient(135deg, #0d1f33 0%, #1a3a5c 60%, #0d2540 100%);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 36px;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    position: relative; overflow: hidden;
+  }
+  body::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 50%, rgba(61,126,166,0.25) 0%, transparent 60%); pointer-events: none; }
+  .left { position: relative; z-index: 2; }
+  .logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .logo-box { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, #3d7ea6 0%, #1a4a6e 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(0,0,0,0.4); flex-shrink: 0; }
+  .logo-box svg { width: 24px; height: 24px; }
+  .brand { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  h1 { font-size: 30px; font-weight: 800; color: #f0f6fc; letter-spacing: -0.02em; margin-bottom: 8px; }
+  h1 span { color: #4a92bd; }
+  .tag { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.4; max-width: 220px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+  .pill { background: rgba(61,126,166,0.3); border: 1px solid rgba(61,126,166,0.4); color: rgba(255,255,255,0.8); padding: 3px 9px; border-radius: 999px; font-size: 10px; font-weight: 500; }
+  .right { position: relative; z-index: 2; }
+  .panel-mock { width: 138px; background: white; border-radius: 9px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .mock-header { background: linear-gradient(135deg, #3d7ea6 0%, #1a4a6e 100%); padding: 7px 9px; display: flex; align-items: center; justify-content: space-between; color: white; }
+  .mock-header span { font-size: 8px; font-weight: 600; }
+  .mock-badge { background: rgba(255,255,255,0.25); padding: 1px 5px; border-radius: 5px; font-size: 8px; font-weight: 600; color: white; }
+  .mock-list { padding: 4px; }
+  .mock-row { display: flex; align-items: center; gap: 5px; padding: 5px 6px; border-radius: 4px; margin-bottom: 2px; background: #f8f8f8; border: 1px solid #ececec; }
+  .mock-row.active { background: #e8f1f8; border-color: #3d7ea6; }
+  .mock-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .mock-name { flex: 1; font-size: 7px; font-weight: 500; color: #1b1b1b; }
+  .mock-count { font-size: 7px; color: #888; background: #ececec; padding: 1px 4px; border-radius: 4px; }
+  .mock-row.active .mock-count { background: #3d7ea6; color: white; }
+  .mock-fab-row { display: flex; justify-content: flex-end; padding: 4px 5px; }
+  .mock-fab { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #3d7ea6, #1a4a6e); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 6px rgba(29,74,110,.4); }
+  .mock-footer { padding: 4px 6px; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; }
+  .mock-donate { background: #c0392b; color: white; border: none; border-radius: 999px; padding: 2px 6px; font-size: 7px; font-weight: 600; }
+  .mock-copy { font-size: 6px; color: #bbb; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="logo-row">
+      <div class="logo-box">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M1 4 L7 4 Q8 4 8 5 L8 18 L4.5 15 L1 18 L1 5 Q0 4 1 4Z" fill="white" fill-opacity="0.35" transform="translate(0 2)"/>
+          <path d="M1 4 L7 4 Q8 4 8 5 L8 18 L4.5 15 L1 18 L1 5 Q0 4 1 4Z" fill="white" fill-opacity="0.35" transform="translate(15 2)"/>
+          <path d="M1 0 L7 0 Q8 0 8 1 L8 19 L4.5 16 L1 19 L1 1 Q0 0 1 0Z" fill="white" transform="translate(7.5 2)"/>
+        </svg>
+      </div>
+      <span class="brand">Zozimus Technologies</span>
+    </div>
+    <h1>Collections<br><span>for Edge</span></h1>
+    <p class="tag">Save links, quotes, images &amp; notes into colour-coded collections.</p>
+    <div class="pills">
+      <span class="pill">&#128279; Links</span>
+      <span class="pill">&#128203; Quotes</span>
+      <span class="pill">&#128247; Images</span>
+      <span class="pill">&#128221; Notes</span>
+    </div>
+  </div>
+  <div class="right">
+    <div class="panel-mock">
+      <div class="mock-header">
+        <span>&#128218; Collections</span>
+        <span class="mock-badge">4</span>
+      </div>
+      <div class="mock-list">
+        <div class="mock-row active"><div class="mock-dot" style="background:#e74c3c"></div><span class="mock-name">Research</span><span class="mock-count">12</span></div>
+        <div class="mock-row"><div class="mock-dot" style="background:#3d7ea6"></div><span class="mock-name">Travel Wishlist</span><span class="mock-count">8</span></div>
+        <div class="mock-row"><div class="mock-dot" style="background:#27ae60"></div><span class="mock-name">Work Resources</span><span class="mock-count">5</span></div>
+        <div class="mock-row"><div class="mock-dot" style="background:#f39c12"></div><span class="mock-name">Reading List</span><span class="mock-count">3</span></div>
+      </div>
+      <div class="mock-fab-row"><div class="mock-fab">+</div></div>
+      <div class="mock-footer">
+        <button class="mock-donate">&#9829; Donate</button>
+        <span class="mock-copy">&copy; Zozimus</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -10,14 +10,14 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const OUT = resolve(__dirname, 'storeassets');
 const file = (name) => 'file://' + resolve(__dirname, 'storeassets', name);
 
-async function shot(page, htmlFile, width, height, outName) {
-  await page.setViewport({ width, height, deviceScaleFactor: 1 });
+async function shot(page, htmlFile, width, height, outName, dpr = 3) {
+  await page.setViewport({ width, height, deviceScaleFactor: dpr });
   await page.goto(file(htmlFile), { waitUntil: 'networkidle0' });
   await page.screenshot({
     path: resolve(OUT, outName),
     clip: { x: 0, y: 0, width, height },
   });
-  console.log(`✓  ${outName}  (${width}×${height})`);
+  console.log(`✓  ${outName}  (${width * dpr}×${height * dpr} @ ${dpr}x)`);
 }
 
 (async () => {
