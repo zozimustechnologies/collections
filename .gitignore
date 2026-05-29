@@ -1,0 +1,8 @@
+node_modules/
+sidepanel.html
+background/
+content/
+assets/
+/icons/
+*.local
+.venv/
