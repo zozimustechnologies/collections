@@ -27,45 +27,6 @@ Built for **Microsoft Edge** using Manifest V3.
 
 ---
 
-## Development
-
-### Prerequisites
-
-- Node.js 18+
-- npm
-
-### Install
-
-```bash
-npm install
-```
-
-### Build
-
-```bash
-npm run build
-```
-
-Outputs directly to the project root (`sidepanel.html`, `background/`, `content/`, `assets/`, `icons/`).
-
-### Watch mode
-
-```bash
-npm run dev
-```
-
-Rebuilds on every file change.
-
-### Generate store assets
-
-```bash
-node screenshot.js
-```
-
-Uses Puppeteer to generate all store asset PNGs into `storeassets/`.
-
----
-
 ## Tech Stack
 
 - **React 18** + **Vite 5**
