@@ -19,7 +19,7 @@ export default function AddItemMenu({ onAdd, onClose, onClosed, closing }) {
   // Fetch current tab URL on mount — query directly instead of going through
   // the background so the sidepanel focus doesn't confuse lastFocusedWindow.
   useEffect(() => {
-    chrome.tabs.query({ active: true }, (tabs) => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       // Pick the first non-extension, non-devtools tab
       const tab = tabs.find(
         (t) => t.url && !t.url.startsWith('chrome') && !t.url.startsWith('edge') && !t.url.startsWith('about')
@@ -43,9 +43,13 @@ export default function AddItemMenu({ onAdd, onClose, onClosed, closing }) {
     setLoading(true)
     setError('')
     try {
-      const tab = await chrome.runtime.sendMessage({ type: 'GET_CURRENT_TAB' })
-      if (!tab || !tab.url) throw new Error('Could not get current tab.')
-      onAdd({ type: 'link', title: tab.title, url: tab.url, favicon: tab.favicon })
+      const tabs = await chrome.tabs.query({ active: true })
+      const tab = tabs.find(
+        (t) => t.url && !t.url.startsWith('chrome') && !t.url.startsWith('edge') && !t.url.startsWith('about')
+      )
+      if (!tab?.url) throw new Error('No accessible page is active.')
+      const favicon = tab.favIconUrl || `${new URL(tab.url).origin}/favicon.ico`
+      onAdd({ type: 'link', title: tab.title || tab.url, url: tab.url, favicon })
     } catch (e) {
       setError(e.message)
     } finally {
@@ -57,8 +61,11 @@ export default function AddItemMenu({ onAdd, onClose, onClosed, closing }) {
     setLoading(true)
     setError('')
     try {
-      const tab = await chrome.runtime.sendMessage({ type: 'GET_CURRENT_TAB' })
-      if (!tab || !tab.url) throw new Error('Could not get current tab.')
+      const tabs = await chrome.tabs.query({ active: true })
+      const tab = tabs.find(
+        (t) => t.url && !t.url.startsWith('chrome') && !t.url.startsWith('edge') && !t.url.startsWith('about')
+      )
+      if (!tab?.url) throw new Error('No accessible page is active.')
       setImageUrl(tab.url)
     } catch (e) {
       setError(e.message)
@@ -75,22 +82,35 @@ export default function AddItemMenu({ onAdd, onClose, onClosed, closing }) {
   async function openTextView() {
     setValue('')
     try {
-      const tabs = await chrome.tabs.query({ active: true })
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs.find(
         (t) => t.url && !t.url.startsWith('chrome') && !t.url.startsWith('edge') && !t.url.startsWith('about')
       )
       if (tab) {
-        await chrome.tabs.sendMessage(tab.id, { type: 'ENTER_SELECTION_MODE' })
+        // Try to message the already-running content script.
+        // If it's not loaded (tab was open before extension install/reload),
+        // inject it first, then retry.
+        try {
+          await chrome.tabs.sendMessage(tab.id, { type: 'ENTER_SELECTION_MODE' })
+        } catch {
+          try {
+            await chrome.scripting.executeScript({
+              target: { tabId: tab.id },
+              files: ['content/content.js'],
+            })
+            chrome.tabs.sendMessage(tab.id, { type: 'ENTER_SELECTION_MODE' }).catch(() => {})
+          } catch { /* scripting permission denied on this page */ }
+        }
         setView('selection')
         return
       }
-    } catch { /* content script not ready, fall through */ }
+    } catch { /* ignore */ }
     setView('text')
   }
 
   async function handleCancelSelection() {
     try {
-      const tabs = await chrome.tabs.query({ active: true })
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
       const tab = tabs.find(
         (t) => t.url && !t.url.startsWith('chrome') && !t.url.startsWith('edge') && !t.url.startsWith('about')
       )

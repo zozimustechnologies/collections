@@ -3,6 +3,7 @@ import { useCollections } from '../hooks/useCollections.js'
 import { loadCollections } from '../utils/storage.js'
 import CollectionList from '../components/CollectionList.jsx'
 import CollectionDetail from '../components/CollectionDetail.jsx'
+import Onboarding from '../components/Onboarding.jsx'
 
 export default function App() {
   const {
@@ -18,6 +19,19 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null)
   // Item queued by context menu / external action to be added
   const [pendingItem, setPendingItem] = useState(null)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  // Show onboarding only on first launch
+  useEffect(() => {
+    chrome.storage.local.get('onboardingDone', ({ onboardingDone }) => {
+      if (!onboardingDone) setShowOnboarding(true)
+    })
+  }, [])
+
+  function finishOnboarding() {
+    chrome.storage.local.set({ onboardingDone: true })
+    setShowOnboarding(false)
+  }
 
   const selectedCollection = collections.find((c) => c.id === selectedId) ?? null
 
@@ -60,6 +74,10 @@ export default function App() {
         <div className="loading-spinner" />
       </div>
     )
+  }
+
+  if (showOnboarding) {
+    return <Onboarding onDone={finishOnboarding} />
   }
 
   if (selectedCollection) {

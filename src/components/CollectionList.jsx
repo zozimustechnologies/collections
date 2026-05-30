@@ -70,9 +70,27 @@ export default function CollectionList({
       <header className="panel-header">
         <div className="panel-header__left">
           <span className="panel-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M4 6h16M4 10h16M4 14h10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              <rect x="14" y="12" width="6" height="8" rx="1" stroke="currentColor" strokeWidth="2"/>
+            <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#4a8db5"/>
+                  <stop offset="100%" stopColor="#2a5f80"/>
+                </linearGradient>
+              </defs>
+              <rect width="100" height="100" rx="22" fill="url(#bg)"/>
+              {/* Left bookmark */}
+              <path d="M22 28 h18 a2 2 0 0 1 2 2 v38 l-11-9 -11 9 V30 a2 2 0 0 1 2-2z" fill="white" fillOpacity="0.35"/>
+              {/* Right bookmark */}
+              <path d="M58 28 h18 a2 2 0 0 1 2 2 v38 l-11-9 -11 9 V30 a2 2 0 0 1 2-2z" fill="white" fillOpacity="0.35"/>
+              {/* Center bookmark */}
+              <path d="M38 22 h24 a2 2 0 0 1 2 2 v46 l-14-11 -14 11 V24 a2 2 0 0 1 2-2z" fill="white"/>
+              {/* Dot */}
+              <circle cx="50" cy="32" r="3" fill="#7aaec8"/>
+              {/* Lines */}
+              <rect x="42" y="40" width="16" height="2.5" rx="1.25" fill="#7aaec8"/>
+              <rect x="42" y="46" width="16" height="2.5" rx="1.25" fill="#7aaec8"/>
+              <rect x="42" y="52" width="13" height="2.5" rx="1.25" fill="#7aaec8"/>
+              <rect x="42" y="58" width="10" height="2.5" rx="1.25" fill="#7aaec8"/>
             </svg>
           </span>
           <h1 className="panel-title">Collections</h1>
