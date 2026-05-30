@@ -3,7 +3,6 @@
   "name": "Collections",
   "description": "Collect and organize web content — links, quotes, images, and notes — just like Edge Collections.",
   "version": "1.0.0",
-  "minimum_chrome_version": "116",
   "permissions": [
     "sidePanel",
     "storage",

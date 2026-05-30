@@ -34,7 +34,7 @@ Right-clicking on any page, link, image, or selected text gives you a **"Save to
 
 ### Privacy
 
-- **100% local** — all data is stored in your browser using `chrome.storage.local`. Nothing is uploaded, synced, or shared.
+- **100% local** — all data is stored locally in your browser. Nothing is uploaded, synced, or shared.
 - **No accounts** — there is no sign-in, no registration, no server of any kind.
 - **No tracking** — zero analytics, zero telemetry, zero cookies.
 - **Minimal permissions** — the extension only requests what it genuinely needs.

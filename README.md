@@ -16,18 +16,14 @@ Built by [Zozimus Technologies](https://zozimustechnologies.github.io/).
 - **Write notes** — freeform text attached to any collection
 - **Multiple collections** — colour-coded, renameable, deleteable
 - **Context menu integration** — right-click any page, link, image, or selection to add it
-- **Persistent storage** — everything saved locally via `chrome.storage.local`
+- **Persistent storage** — everything saved locally via the browser's local storage API
 - **Sidebar panel** — lives in the browser sidebar, always accessible
 
 ---
 
 ## Browser Support
 
-Targets all Chromium-based browsers using Manifest V3:
-
-- Microsoft Edge
-- Brave
-- Any Chromium-based browser
+Built for **Microsoft Edge** using Manifest V3.
 
 ---
 
@@ -74,7 +70,7 @@ Uses Puppeteer to generate all store asset PNGs into `storeassets/`.
 
 - **React 18** + **Vite 5**
 - **Manifest V3** — `sidePanel`, `contextMenus`, `tabs`, `scripting`, `storage`
-- No backend — all data stored in `chrome.storage.local`
+- No backend — all data stored locally in the browser
 
 ---
 
@@ -97,7 +93,7 @@ src/
   hooks/
     useCollections.js             # CRUD + storage sync
   utils/
-    storage.js                   # chrome.storage.local wrapper
+    storage.js                   # browser storage wrapper
   styles/
     index.css                    # Full design system
 docs/
